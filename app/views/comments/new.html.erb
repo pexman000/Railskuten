@@ -1,0 +1,12 @@
+<div class="container">
+  <p></p>
+<h1>New comment</h1>
+<div>
+  <%= link_to "Back to posts", posts_path, class:"btn btn-primary" %>
+</div>
+<%= render partial: 'posts/post', locals: { post: @post, show_comments: true, parent_comment: @parent_comment } %>
+<%= render 'form', comment: @comment, post: @post, parent_comment: @comment.parent_comment %>
+
+<br>
+
+</div>

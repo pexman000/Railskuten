@@ -1,0 +1,11 @@
+<div class="container">
+<p style="color: green"><%= notice %></p>
+<h1>More details</h1>
+<%= link_to "Back to posts", posts_path, class: "btn btn-primary" %>
+<%= render @post %>
+
+<div>
+  <%= link_to "Edit this post", edit_post_path(@post), class: "btn btn-primary" %>
+  <%= button_to "Destroy this post", @post, method: :delete, class: "btn btn-danger" %>
+</div>
+</div>

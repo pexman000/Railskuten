@@ -1,0 +1,13 @@
+<div class="container">
+  <p style="color: green"><%= notice %></p>
+
+  <h1>Latest posts</h1>
+  <% if current_user %> <!-- Vérifie si un utilisateur est connecté -->
+    <%= link_to "New post", new_post_path, class: "btn btn-primary" %>
+  <% end %>
+  <div id="posts">
+    <% @posts.each do |post| %>
+      <%= render post %>
+    <% end %>
+  </div>
+</div>

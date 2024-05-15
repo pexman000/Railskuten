@@ -1,0 +1,32 @@
+<% url = @parent_comment.present? ? post_comment_add_child_comment_parent_path(post_id: @post.id, parent_id: @parent_comment.id) : post_comments_path(@post) %>
+<% comment = @parent_comment.present? ? @parent_comment.children.build : @post.comments.build %>
+
+<%= form_with(model: [comment.new_record? ? @post : @parent_comment, comment], url: url) do |form| %>
+
+<% if @comment.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+    <ul>
+      <% @comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="card">
+    <h5 class="card-header"><i class="bi bi-person-circle"></i>&nbsp;You</h5>
+    <div class="card-body">
+      <p class="card-text">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Content</span>
+          <%= form.text_area :content, class:"form-control" %>
+        </div>  
+      </p>
+      <div>
+        <%= form.submit "Send", class: "btn btn-success" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

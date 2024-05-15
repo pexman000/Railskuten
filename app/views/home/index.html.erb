@@ -1,0 +1,21 @@
+<div class="container" id="posts-content">
+<% if logged_in? %>
+  <h1>Welcome back on railskuten, <%= current_user.name %>!</h1>
+<% else %>
+  <h1>Welcome on railskuten!</h1>
+<% end %>
+<% @posts.each do |post| %>
+    <%= render post %>
+<% end %>
+</div>
+<div class="offcanvas offcanvas-end show" data-bs-scroll="true" data-bs-backdrop="false" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+      <div class="offcanvas-header text-center">
+        <h5 class="offcanvas-title text-center" id="offcanvasScrollingLabel">Users connected</h5>
+      </div>
+      <div class="offcanvas-body">
+        <p class="text-center">You can find all users connected to railskuten today.</p>
+        <% @users.each do |user| %>
+            <%= render user %>
+        <% end %>
+      </div>
+    </div>

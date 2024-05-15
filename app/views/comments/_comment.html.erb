@@ -1,0 +1,17 @@
+<div id="<%= dom_id comment %>">
+<% if green  %>
+<div class="card bg-success" style="--bs-bg-opacity: .5;">
+<% else  %>
+<div class="card">
+<% end %>
+    <h5 class="card-header"><i class="bi bi-person-circle"></i>&nbsp;<%= User.find(comment.user_id).username %><span class="text-muted" style="--bs-text-opacity: .5;">&nbsp;•&nbsp;<%= time_ago_in_words(Comment.find(comment.id).created_at).gsub('about ', '') %> ago</span></h5>
+    <div class="card-body">
+      <p class="card-text"><%= comment.content %></p>
+        <%= link_to post_comment_add_child_comment_path(post_id: comment.post_id, comment_id: comment.id), class: "btn btn-outline-primary" do %>
+          <i class="bi bi-chat-dots"></i>
+        <% end %>
+      <%= recursive_comments(comment.children, comment.post_id, true) if comment.children.any? %>
+    </div>
+  </div>
+  
+</div>

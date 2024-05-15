@@ -1,0 +1,31 @@
+<div class="card" id="<%= dom_id post %>">
+  <h5 class="card-header"><i class="bi bi-person-circle"></i>&nbsp;<%= User.find(post.user_id).username %><span class="text-muted" style="--bs-text-opacity: .5;">&nbsp;•&nbsp;<%= time_ago_in_words(Post.find(post.id).created_at).gsub('about ', '') %> ago</span></h5>
+  <div class="card-body">
+    <h5 class="card-title"><%= post.title %></h5>
+    <p class="card-text"><%= post.content %></p>
+    <% if !@show_comments %>
+      <%= link_to post, class: "btn btn-outline-primary" do %>
+        <i class="bi bi-eye-fill"></i>
+      <% end %>
+      <%= link_to new_post_comment_path(post), class: "btn btn-outline-primary" do %>
+        <i class="bi bi-chat-dots"></i>
+      <% end %>
+    <% end %>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <button type="button" class="btn btn-outline-success">
+        <i class="bi bi-caret-up-square"></i>
+        <%= post.upvotes %></button>
+      <button type="button" class="btn btn-outline-danger">
+        <i class="bi bi-caret-down-square"></i>
+        <%= post.downvotes %></button>
+    </div>
+  </div>
+  <div class="container">
+  <% if !@show_comments %>
+    <%= recursive_comments(post.comments, @post) %>
+  <% end %>
+  <% if @parent_comment %>
+    <%= render partial: 'comments/comment', locals: {comment: @parent_comment, green: true} %>
+  <% end %>
+</div>
+</div>
